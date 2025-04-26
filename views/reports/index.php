@@ -97,6 +97,13 @@
 
         // Fetch data for charts
         const filters = [{
+                label: 'residential',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15OfferingType': ['RS', 'RR']
+                }
+            },
+            {
                 label: 'residentialSale',
                 filter: {
                     'ufCrm15OfferingType': 'RS',
@@ -140,6 +147,13 @@
                     'ufCrm15Status': 'PUBLISHED',
                     'ufCrm15WebsiteEnable': true,
                     'ufCrm15OfferingType': ['RS', 'RR']
+                }
+            },
+            {
+                label: 'commercial',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15OfferingType': ['CS', 'CR']
                 }
             },
             {
@@ -219,7 +233,6 @@
             }
             renderCharts(stats);
 
-
         } catch (error) {
             console.error('Error fetching data:', error);
             loadingSpinner.style.display = 'none';
@@ -265,6 +278,7 @@
             // Create modern donut charts
             if (hasResidentialData) {
                 createDonutChart('residential-chart', [
+                    stats.residential || 0,
                     stats.residentialSale || 0,
                     stats.residentialRent || 0,
                     stats.residentialPropertyFinder || 0,
@@ -276,6 +290,7 @@
 
             if (hasCommercialData) {
                 createDonutChart('commercial-chart', [
+                    stats.commercial || 0,
                     stats.commercialSale || 0,
                     stats.commercialRent || 0,
                     stats.commercialPropertyFinder || 0,
@@ -287,6 +302,14 @@
         }
 
         function createDonutChart(elementId, seriesData) {
+            // Calculate the correct total based on which chart we're rendering
+            let correctTotal;
+            if (elementId === 'residential-chart') {
+                correctTotal = stats.residential;
+            } else {
+                correctTotal = stats.commercial;
+            }
+
             const options = {
                 series: seriesData,
                 chart: {
@@ -329,8 +352,9 @@
                                     fontSize: '16px',
                                     fontWeight: 600,
                                     color: '#374151',
-                                    formatter: function(w) {
-                                        return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                                    formatter: function() {
+                                        // Return our pre-calculated correct total
+                                        return correctTotal;
                                     }
                                 },
                                 value: {
