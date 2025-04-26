@@ -285,6 +285,11 @@
         }
     }
 
+    function sqftToSqm(sqft) {
+        const sqm = sqft * 0.092903;
+        return parseFloat(sqm.toFixed(2));
+    }
+
     function changePage(direction) {
         if (direction === 'prev' && currentPage > 1) {
             currentPage--;
