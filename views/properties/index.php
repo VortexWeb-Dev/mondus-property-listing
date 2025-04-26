@@ -290,6 +290,16 @@
         return parseFloat(sqm.toFixed(2));
     }
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const options = {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        };
+        return date.toLocaleDateString('en-US', options);
+    }
+
     function changePage(direction) {
         if (direction === 'prev' && currentPage > 1) {
             currentPage--;

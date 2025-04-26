@@ -105,6 +105,8 @@
                     await sendNotification(Number(adminId), message);
                 }));
             }
+
+            window.location.href = 'index.php?page=properties';
         } catch (error) {
             console.error('Error:', error);
         }
