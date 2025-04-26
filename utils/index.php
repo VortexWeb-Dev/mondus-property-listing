@@ -847,11 +847,13 @@ function getUser($filter)
 function isAdmin($userId)
 {
     $admins = [
-        10, // VortexWeb
+        1, // Mohammed Fayaz
+        3, // Sandeep Chachra
+        6, // Muskan Gulati
+        9, // Chathura Abeywardana
     ];
 
-    // return in_array($userId, $admins);
-    return true;
+    return in_array($userId, $admins);
 }
 
 
