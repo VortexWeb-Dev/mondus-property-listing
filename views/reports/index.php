@@ -1,302 +1,391 @@
 <div class="w-4/5 mx-auto py-8">
     <h1 class="text-3xl font-semibold text-gray-800">Reports</h1>
 
-    <div class="container mx-auto flex justify-center gap-6 mt-6">
-        <div class="flex flex-col justify-center items-center">
-            <h2 class="text-lg text-gray-600">Residential</h2>
-            <div id="hs-doughnut-chart"></div>
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="flex justify-center items-center my-12">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
+    </div>
 
-            <!-- Legend Indicator -->
-            <div class="flex justify-center sm:justify-end items-center gap-x-4 mt-3 sm:mt-6">
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+    <div id="charts-container" class="container mx-auto flex flex-col md:flex-row justify-center gap-8 mt-6" style="display: none;">
+        <!-- Residential Section -->
+        <div class="flex flex-col justify-center items-center p-6 rounded-lg shadow-sm bg-white">
+            <h2 class="text-xl font-medium text-gray-700 mb-4">Residential Properties</h2>
+            <div id="residential-chart" class="h-64 w-64"></div>
 
-                        Sale <span id="residential-sale"></span>
-                    </span>
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6">
+                <div class="flex flex-col items-center p-3 rounded-lg bg-blue-50">
+                    <span class="text-sm font-medium text-gray-500">Sale</span>
+                    <span id="residential-sale" class="text-lg font-semibold text-blue-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-
-                        Rent <span id="residential-rent"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-cyan-50">
+                    <span class="text-sm font-medium text-gray-500">Rent</span>
+                    <span id="residential-rent" class="text-lg font-semibold text-cyan-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-
-                        PF <span id="residential-property-finder"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-orange-50">
+                    <span class="text-sm font-medium text-gray-500">PF</span>
+                    <span id="residential-property-finder" class="text-lg font-semibold text-orange-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-
-                        Bayut <span id="residential-bayut"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-green-50">
+                    <span class="text-sm font-medium text-gray-500">Bayut</span>
+                    <span id="residential-bayut" class="text-lg font-semibold text-green-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-
-                        Dubizzle <span id="residential-dubizzle"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-purple-50">
+                    <span class="text-sm font-medium text-gray-500">Dubizzle</span>
+                    <span id="residential-dubizzle" class="text-lg font-semibold text-purple-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Website <span id="residential-website"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-pink-50">
+                    <span class="text-sm font-medium text-gray-500">Website</span>
+                    <span id="residential-website" class="text-lg font-semibold text-pink-600">0</span>
                 </div>
             </div>
-            <!-- End Legend Indicator -->
         </div>
-        <div class="flex flex-col justify-center items-center">
-            <h2 class="text-lg text-gray-600">Commercial</h2>
-            <div id="hs-doughnut-chart-2"></div>
 
-            <!-- Legend Indicator -->
-            <div class="flex justify-center sm:justify-end items-center gap-x-4 mt-3 sm:mt-6">
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Sale <span id="commercial-sale"></span>
-                    </span>
+        <!-- Commercial Section -->
+        <div class="flex flex-col justify-center items-center p-6 rounded-lg shadow-sm bg-white">
+            <h2 class="text-xl font-medium text-gray-700 mb-4">Commercial Properties</h2>
+            <div id="commercial-chart" class="h-64 w-64"></div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-6">
+                <div class="flex flex-col items-center p-3 rounded-lg bg-blue-50">
+                    <span class="text-sm font-medium text-gray-500">Sale</span>
+                    <span id="commercial-sale" class="text-lg font-semibold text-blue-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Rent <span id="commercial-rent"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-cyan-50">
+                    <span class="text-sm font-medium text-gray-500">Rent</span>
+                    <span id="commercial-rent" class="text-lg font-semibold text-cyan-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        PF <span id="commercial-property-finder"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-orange-50">
+                    <span class="text-sm font-medium text-gray-500">PF</span>
+                    <span id="commercial-property-finder" class="text-lg font-semibold text-orange-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Bayut <span id="commercial-bayut"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-green-50">
+                    <span class="text-sm font-medium text-gray-500">Bayut</span>
+                    <span id="commercial-bayut" class="text-lg font-semibold text-green-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Dubizzle <span id="commercial-dubizzle"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-purple-50">
+                    <span class="text-sm font-medium text-gray-500">Dubizzle</span>
+                    <span id="commercial-dubizzle" class="text-lg font-semibold text-purple-600">0</span>
                 </div>
-                <div class="inline-flex items-center">
-                    <span class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Website <span id="commercial-website"></span>
-                    </span>
+                <div class="flex flex-col items-center p-3 rounded-lg bg-pink-50">
+                    <span class="text-sm font-medium text-gray-500">Website</span>
+                    <span id="commercial-website" class="text-lg font-semibold text-pink-600">0</span>
                 </div>
             </div>
-            <!-- End Legend Indicator -->
         </div>
+    </div>
+
+    <!-- No Data Message -->
+    <div id="no-data-message" class="text-center py-12" style="display: none;">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900">No data available</h3>
+        <p class="mt-1 text-sm text-gray-500">We couldn't find any property data to display.</p>
     </div>
 </div>
 
-<script src="https://preline.co/assets/js/hs-apexcharts-helpers.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 <script>
     window.addEventListener('load', async () => {
-        // Fetch data for Apex Doughnut Chart
-        let baseUrl = API_BASE_URL;
-        let properties = [];
-        const response = await fetch(`${baseUrl}/crm.item.list?entityTypeId=${LISTINGS_ENTITY_TYPE_ID}&select[0]=ufCrm15OfferingType&select[1]=ufCrm15PfEnable&select[2]=ufCrm15BayutEnable&select[3]=ufCrm15DubizzleEnable&select[4]=ufCrm15WebsiteEnable`);
-        const data = await response.json();
-        const totalOwners = data.total;
+        // Show loading spinner initially
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const chartsContainer = document.getElementById('charts-container');
+        const noDataMessage = document.getElementById('no-data-message');
 
-        for (let i = 0; i < Math.ceil(totalOwners / 50); i++) {
-            const response = await fetch(`${baseUrl}/crm.item.list?entityTypeId=${LISTINGS_ENTITY_TYPE_ID}&select[0]=ufCrm15OfferingType&select[1]=ufCrm15PfEnable&select[2]=ufCrm15BayutEnable&select[3]=ufCrm15DubizzleEnable&select[4]=ufCrm15WebsiteEnable&start=${i * 50}`);
-            const data = await response.json();
-            properties = properties.concat(data.result.items);
-        }
-
-        let residentialSale = 0;
-        let residentialRent = 0;
-        let residentialPropertyFinder = 0;
-        let residentialBayut = 0;
-        let residentialDubizzle = 0;
-        let residentialWebsite = 0;
-
-        let commercialSale = 0;
-        let commercialRent = 0;
-        let commercialPropertyFinder = 0;
-        let commercialBayut = 0;
-        let commercialDubizzle = 0;
-        let commercialWebsite = 0;
-
-        properties.forEach(property => {
-            if (property['ufCrm15OfferingType'] === 'RS' || property['offeringType'] === 'RR') {
-                // Residential
-                if (property['ufCrm15PfEnable']) residentialPropertyFinder++;
-                if (property['ufCrm15BayutEnable']) residentialBayut++;
-                if (property['ufCrm15DubizzleEnable']) residentialDubizzle++;
-                if (property['ufCrm15WebsiteEnable']) residentialWebsite++;
-                if (property['ufCrm15OfferingType'] === 'RS') {
-                    residentialSale++;
-                } else {
-                    residentialRent++;
+        // Fetch data for charts
+        const filters = [{
+                label: 'residentialSale',
+                filter: {
+                    'ufCrm15OfferingType': 'RS',
+                    'ufCrm15Status': 'PUBLISHED'
                 }
-            } else if (property['ufCrm15OfferingType'] === 'CS' || property['offeringType'] === 'CR') {
-                // Commercial
-                if (property['ufCrm15PfEnable']) commercialPropertyFinder++;
-                if (property['ufCrm15BayutEnable']) commercialBayut++;
-                if (property['ufCrm15DubizzleEnable']) commercialDubizzle++;
-                if (property['ufCrm15WebsiteEnable']) commercialWebsite++;
-                if (property['ufCrm15OfferingType'] === 'CS') {
-                    commercialSale++;
-                } else {
-                    commercialRent++;
+            },
+            {
+                label: 'residentialRent',
+                filter: {
+                    'ufCrm15OfferingType': 'RR',
+                    'ufCrm15Status': 'PUBLISHED'
+                }
+            },
+            {
+                label: 'residentialPropertyFinder',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15PfEnable': true,
+                    'ufCrm15OfferingType': ['RS', 'RR']
+                }
+            },
+            {
+                label: 'residentialBayut',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15BayutEnable': true,
+                    'ufCrm15OfferingType': ['RS', 'RR']
+                }
+            },
+            {
+                label: 'residentialDubizzle',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15DubizzleEnable': true,
+                    'ufCrm15OfferingType': ['RS', 'RR']
+                }
+            },
+            {
+                label: 'residentialWebsite',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15WebsiteEnable': true,
+                    'ufCrm15OfferingType': ['RS', 'RR']
+                }
+            },
+            {
+                label: 'commercialSale',
+                filter: {
+                    'ufCrm15OfferingType': 'CS',
+                    'ufCrm15Status': 'PUBLISHED'
+                }
+            },
+            {
+                label: 'commercialRent',
+                filter: {
+                    'ufCrm15OfferingType': 'CR',
+                    'ufCrm15Status': 'PUBLISHED'
+                }
+            },
+            {
+                label: 'commercialPropertyFinder',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15PfEnable': true,
+                    'ufCrm15OfferingType': ['CS', 'CR']
+                }
+            },
+            {
+                label: 'commercialBayut',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15BayutEnable': true,
+                    'ufCrm15OfferingType': ['CS', 'CR']
+                }
+            },
+            {
+                label: 'commercialDubizzle',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15DubizzleEnable': true,
+                    'ufCrm15OfferingType': ['CS', 'CR']
+                }
+            },
+            {
+                label: 'commercialWebsite',
+                filter: {
+                    'ufCrm15Status': 'PUBLISHED',
+                    'ufCrm15WebsiteEnable': true,
+                    'ufCrm15OfferingType': ['CS', 'CR']
                 }
             }
-        });
+        ];
 
-        if (residentialSale === 0 && residentialRent === 0 && residentialPropertyFinder === 0 && residentialBayut === 0 && residentialDubizzle === 0 && residentialWebsite === 0) {
-            document.getElementById('hs-doughnut-chart').innerHTML = '<p class="text-sm text-center text-gray-600">No data found</p>';
+        let stats = {};
+
+        try {
+            for (const {
+                    label,
+                    filter
+                }
+                of filters) {
+                const response = await fetch(`${API_BASE_URL}/crm.item.list`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        entityTypeId: LISTINGS_ENTITY_TYPE_ID,
+                        filter,
+                        select: ['id']
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API request failed for ${label}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                stats[label] = data.total ?? (data.result?.items?.length || 0);
+            }
+            renderCharts(stats);
+
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            loadingSpinner.style.display = 'none';
+            noDataMessage.style.display = 'block';
         }
 
-        if (commercialSale === 0 && commercialRent === 0 && commercialPropertyFinder === 0 && commercialBayut === 0 && commercialDubizzle === 0 && commercialWebsite === 0) {
-            document.getElementById('hs-doughnut-chart-2').innerHTML = '<p class="text-sm text-center text-gray-600">No data found</p>';
+        function renderCharts(stats) {
+            // Hide loading spinner
+            loadingSpinner.style.display = 'none';
+
+            // Check if we have any data
+            const hasResidentialData = stats.residentialSale > 0 || stats.residentialRent > 0 ||
+                stats.residentialPropertyFinder > 0 || stats.residentialBayut > 0 ||
+                stats.residentialDubizzle > 0 || stats.residentialWebsite > 0;
+
+            const hasCommercialData = stats.commercialSale > 0 || stats.commercialRent > 0 ||
+                stats.commercialPropertyFinder > 0 || stats.commercialBayut > 0 ||
+                stats.commercialDubizzle > 0 || stats.commercialWebsite > 0;
+
+            if (!hasResidentialData && !hasCommercialData) {
+                noDataMessage.style.display = 'block';
+                return;
+            }
+
+            // Show charts container
+            chartsContainer.style.display = 'flex';
+
+            // Update DOM with stats
+            document.getElementById('residential-sale').textContent = stats.residentialSale || 0;
+            document.getElementById('residential-rent').textContent = stats.residentialRent || 0;
+            document.getElementById('residential-property-finder').textContent = stats.residentialPropertyFinder || 0;
+            document.getElementById('residential-bayut').textContent = stats.residentialBayut || 0;
+            document.getElementById('residential-dubizzle').textContent = stats.residentialDubizzle || 0;
+            document.getElementById('residential-website').textContent = stats.residentialWebsite || 0;
+
+            document.getElementById('commercial-sale').textContent = stats.commercialSale || 0;
+            document.getElementById('commercial-rent').textContent = stats.commercialRent || 0;
+            document.getElementById('commercial-property-finder').textContent = stats.commercialPropertyFinder || 0;
+            document.getElementById('commercial-bayut').textContent = stats.commercialBayut || 0;
+            document.getElementById('commercial-dubizzle').textContent = stats.commercialDubizzle || 0;
+            document.getElementById('commercial-website').textContent = stats.commercialWebsite || 0;
+
+            // Create modern donut charts
+            if (hasResidentialData) {
+                createDonutChart('residential-chart', [
+                    stats.residentialSale || 0,
+                    stats.residentialRent || 0,
+                    stats.residentialPropertyFinder || 0,
+                    stats.residentialBayut || 0,
+                    stats.residentialDubizzle || 0,
+                    stats.residentialWebsite || 0
+                ]);
+            }
+
+            if (hasCommercialData) {
+                createDonutChart('commercial-chart', [
+                    stats.commercialSale || 0,
+                    stats.commercialRent || 0,
+                    stats.commercialPropertyFinder || 0,
+                    stats.commercialBayut || 0,
+                    stats.commercialDubizzle || 0,
+                    stats.commercialWebsite || 0
+                ]);
+            }
         }
 
-        document.getElementById('residential-sale').textContent = residentialSale;
-        document.getElementById('residential-rent').textContent = residentialRent;
-        document.getElementById('residential-property-finder').textContent = residentialPropertyFinder;
-        document.getElementById('residential-bayut').textContent = residentialBayut;
-        document.getElementById('residential-dubizzle').textContent = residentialDubizzle;
-        document.getElementById('residential-website').textContent = residentialWebsite;
-
-        document.getElementById('commercial-sale').textContent = commercialSale;
-        document.getElementById('commercial-rent').textContent = commercialRent;
-        document.getElementById('commercial-property-finder').textContent = commercialPropertyFinder;
-        document.getElementById('commercial-bayut').textContent = commercialBayut;
-        document.getElementById('commercial-dubizzle').textContent = commercialDubizzle;
-        document.getElementById('commercial-website').textContent = commercialWebsite;
-
-        // Apex Doughnut Chart
-        (function() {
-            // Residential
-            buildChart('#hs-doughnut-chart', (mode) => ({
+        function createDonutChart(elementId, seriesData) {
+            const options = {
+                series: seriesData,
                 chart: {
-                    height: 230,
-                    width: 230,
                     type: 'donut',
-                    zoom: {
-                        enabled: false
+                    height: 250,
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    animations: {
+                        enabled: true,
+                        easing: 'easeinout',
+                        speed: 800,
+                        animateGradually: {
+                            enabled: true,
+                            delay: 150
+                        },
+                        dynamicAnimation: {
+                            enabled: true,
+                            speed: 350
+                        }
+                    },
+                    dropShadow: {
+                        enabled: true,
+                        top: 0,
+                        left: 0,
+                        blur: 3,
+                        opacity: 0.1
                     }
                 },
+                labels: ['Sale', 'Rent', 'PF', 'Bayut', 'Dubizzle', 'Website'],
+                colors: ['#3b82f6', '#06b6d4', '#f97316', '#10b981', '#8b5cf6', '#ec4899'],
                 plotOptions: {
                     pie: {
                         donut: {
-                            size: '76%'
+                            size: '70%',
+                            labels: {
+                                show: true,
+                                total: {
+                                    show: true,
+                                    showAlways: true,
+                                    label: 'Total',
+                                    fontSize: '16px',
+                                    fontWeight: 600,
+                                    color: '#374151',
+                                    formatter: function(w) {
+                                        return w.globals.seriesTotals.reduce((a, b) => a + b, 0);
+                                    }
+                                },
+                                value: {
+                                    show: true,
+                                    fontSize: '22px',
+                                    fontWeight: 600,
+                                    color: '#374151',
+                                    offsetY: 0,
+                                }
+                            }
                         }
                     }
                 },
-                series: [residentialSale || 0, residentialRent || 0, residentialPropertyFinder || 0, residentialBayut || 0, residentialDubizzle || 0, residentialWebsite || 0],
-                labels: ['Sale', 'Rent', 'PF', 'Bayut', 'Dubizzle', 'Website'],
+                stroke: {
+                    width: 2,
+                    colors: ['#fff']
+                },
                 legend: {
                     show: false
+                },
+                tooltip: {
+                    enabled: true,
+                    fillSeriesColor: false,
+                    style: {
+                        fontSize: '14px'
+                    },
+                    y: {
+                        formatter: function(value) {
+                            return value;
+                        }
+                    }
                 },
                 dataLabels: {
                     enabled: false
                 },
-                stroke: {
-                    width: 5
-                },
-                grid: {
-                    padding: {
-                        top: -12,
-                        bottom: -11,
-                        left: -12,
-                        right: -12
-                    }
-                },
                 states: {
                     hover: {
                         filter: {
-                            type: 'none'
+                            type: 'darken',
+                            value: 0.85
                         }
                     }
                 },
-                tooltip: {
-                    enabled: true,
-                    custom: function(props) {
-                        return buildTooltipForDonut(
-                            props,
-                            mode === 'dark' ? ['#fff', '#fff', '#000', '#000', '#000', '#000'] : ['#fff', '#fff', '#000', '#000', '#000', '#000']
-                        );
-                    }
-                }
-            }), {
-                colors: ['#3b82f6', '#22d3ee', '#f97316', '#10b981', '#8b5cf6', '#ec4899'], // Distinct colors for each label
-                stroke: {
-                    colors: ['rgb(255, 255, 255)'] // Stroke for light mode
-                }
-            }, {
-                colors: ['#2563eb', '#06b6d4', '#ea580c', '#059669', '#7c3aed', '#db2777'], // Distinct colors for dark mode
-                stroke: {
-                    colors: ['rgb(38, 38, 38)'] // Stroke for dark mode
-                }
-            });
-        })();
-        (function() {
-            // Commercial
-            buildChart('#hs-doughnut-chart-2', (mode) => ({
-                chart: {
-                    height: 230,
-                    width: 230,
-                    type: 'donut',
-                    zoom: {
-                        enabled: false
-                    }
-                },
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: '76%'
+                responsive: [{
+                    breakpoint: 480,
+                    options: {
+                        chart: {
+                            height: 200
                         }
                     }
-                },
-                series: [commercialSale || 0, commercialRent || 0, commercialPropertyFinder || 0, commercialBayut || 0, commercialDubizzle || 0, commercialWebsite || 0],
-                labels: ['Sale', 'Rent', 'PF', 'Bayut', 'Dubizzle', 'Website'],
-                legend: {
-                    show: false
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    width: 5
-                },
-                grid: {
-                    padding: {
-                        top: -12,
-                        bottom: -11,
-                        left: -12,
-                        right: -12
-                    }
-                },
-                states: {
-                    hover: {
-                        filter: {
-                            type: 'none'
-                        }
-                    }
-                },
-                tooltip: {
-                    enabled: true,
-                    custom: function(props) {
-                        return buildTooltipForDonut(
-                            props,
-                            mode === 'dark' ? ['#fff', '#fff', '#000', '#000', '#000', '#000'] : ['#fff', '#fff', '#000', '#000', '#000', '#000']
-                        );
-                    }
-                }
-            }), {
-                colors: ['#3b82f6', '#22d3ee', '#f97316', '#10b981', '#8b5cf6', '#ec4899'], // Distinct colors for each label
-                stroke: {
-                    colors: ['rgb(255, 255, 255)'] // Stroke for light mode
-                }
-            }, {
-                colors: ['#2563eb', '#06b6d4', '#ea580c', '#059669', '#7c3aed', '#db2777'], // Distinct colors for dark mode
-                stroke: {
-                    colors: ['rgb(38, 38, 38)'] // Stroke for dark mode
-                }
-            });
-        })();
+                }]
+            };
+
+            const chart = new ApexCharts(document.getElementById(elementId), options);
+            chart.render();
+        }
     });
 </script>

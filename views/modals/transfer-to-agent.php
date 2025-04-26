@@ -15,6 +15,8 @@
                         <select id="listing_agent" name="listing_agent" class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" required>
                             <option value="">Please select</option>
                             <?php
+                            define('C_REST_WEB_HOOK_URL', 'https://mondus.group/rest/1/dw9gd4xauhctd7ha/');
+
                             $agents_result = CRest::call('crm.item.list', [
                                 'entityTypeId' => AGENTS_ENTITY_TYPE_ID,
                                 'select' => ['ufCrm14AgentId', 'ufCrm14AgentName']
@@ -87,12 +89,13 @@
             "ufCrm15AgentLicense": agent.ufCrm14AgentLicense
         };
 
-        const propertyIds = formData.get('transferAgentPropertyIds').split(',');
+        const propertyIds = formData.get('transferAgentPropertyIds').split(',') || JSON.parse(localStorage.getItem('transferAgentPropertyIds')) || [];
 
         for (const id of propertyIds) {
             await updateItem(LISTINGS_ENTITY_TYPE_ID, fields, Number(id));
         }
 
-        window.location.href = '?page=properties';
+        localStorage.removeItem('transferAgentPropertyIds');
+        window.location.replace('?page=properties');
     }
 </script>

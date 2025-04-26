@@ -39,7 +39,7 @@ $fields = [
     'ufCrm15BuildYear',
     'ufCrm15Parking',
     'ufCrm15Furnished',
-    'ufCrm_12_360_VIEW_URL',
+    'ufCrm_15_360_VIEW_URL',
     'ufCrm15PhotoLinks',
     'ufCrm15FloorPlan',
     'ufCrm15Geopoints',

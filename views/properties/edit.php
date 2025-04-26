@@ -132,7 +132,7 @@
             "ufCrm15ServiceCharge": data.service_charge,
             "ufCrm15FinancialStatus": data.financial_status,
             "ufCrm15VideoTourUrl": data.video_tour_url,
-            "ufCrm_12_360_VIEW_URL": data["360_view_url"],
+            "ufCrm_15_360_VIEW_URL": data["360_view_url"],
             "ufCrm15QrCodePropertyBooster": data.qr_code_url,
 
             "ufCrm15Location": data.pf_location,
@@ -156,20 +156,12 @@
             "ufCrm15LandlordName": data.landlord_name,
             "ufCrm15LandlordEmail": data.landlord_email,
             "ufCrm15LandlordContact": data.landlord_phone,
-            // Landlord 2
-            "ufCrm_12_LANDLORD_NAME_2": data.landlord_name2,
-            "ufCrm_12_LANDLORD_EMAIL_2": data.landlord_email2,
-            "ufCrm_12_LANDLORD_CONTACT_2": data.landlord_phone2,
-            // Landlord 3
-            "ufCrm_12_LANDLORD_NAME_3": data.landlord_name3,
-            "ufCrm_12_LANDLORD_EMAIL_3": data.landlord_email3,
-            "ufCrm_12_LANDLORD_CONTACT_3": data.landlord_phone3,
 
             "ufCrm15ContractExpiryDate": data.contract_expiry,
             "ufCrm15UnitNo": data.unit_no,
             "ufCrm15SaleType": data.sale_type,
             "ufCrm15BrochureDescription": data.brochure_description_1,
-            "ufCrm_12_BROCHURE_DESCRIPTION_2": data.brochure_description_2,
+            "ufCrm_15_BROCHURE_DESCRIPTION_2": data.brochure_description_2,
 
             "ufCrm15HidePrice": data.hide_price === "on" ? "Y" : "N",
             "ufCrm15PfEnable": data.pf_enable === "on" ? "Y" : "N",
