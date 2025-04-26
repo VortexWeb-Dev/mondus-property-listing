@@ -55,6 +55,21 @@
         }
     })
 
+    async function sendNotification(userId, message) {
+        try {
+            const response = await fetch(`${API_BASE_URL}im.notify.system.add?USER_ID=${userId}&MESSAGE=${encodeURIComponent(message)}`);
+
+            if (!response.ok) {
+                console.error(`Failed to send notification to user ${userId}:`, response.statusText);
+                return;
+            }
+
+            const data = await response.json();
+        } catch (error) {
+            console.error(`Error sending notification to user ${userId}:`, error);
+        }
+    }
+
     async function addItem(entityTypeId, fields) {
         try {
             const response = await fetch(`${API_BASE_URL}crm.item.add?entityTypeId=${entityTypeId}`, {
@@ -67,10 +82,28 @@
                 }),
             });
 
-            if (response.ok) {
-                window.location.href = 'index.php?page=properties';
-            } else {
-                console.error('Failed to add item');
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error('Failed to add item:', errorData);
+                alert(`Error: ${errorData?.error_description || 'Failed to add the item. Please try again.'}`);
+                return;
+            }
+
+            const data = await response.json();
+
+            if (fields['ufCrm15Status'] === 'LIVE') {
+                const adminNames = {
+                    1: "Mohammed Fayaz",
+                    3: "Sandeep Chachra",
+                    6: "Muskan Gulati",
+                    9: "Chathura Abeywardana",
+                };
+
+                await Promise.all(Object.entries(adminNames).map(async ([adminId, adminName]) => {
+                    const message = `Hey ${adminName},<br><br>A new live listing has been added to the <b>Property Listing</b> module.<br>Please review, confirm, and publish it.<br><br>🔹 <b>Title:</b> ${fields['ufCrm15TitleEn']}<br>🔹 <b>Reference Number:</b> ${fields['ufCrm15ReferenceNumber']}`;
+
+                    await sendNotification(Number(adminId), message);
+                }));
             }
         } catch (error) {
             console.error('Error:', error);
